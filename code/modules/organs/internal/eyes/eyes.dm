@@ -1,4 +1,3 @@
-
 /datum/organ/internal/eyes
 	name = "eyes"
 	parent_organ = LIMB_HEAD
@@ -28,7 +27,7 @@
 	removed_type = /obj/item/organ/internal/eyes/tajaran
 
 /datum/organ/internal/eyes/tajaran/update_perception(var/mob/living/carbon/human/M)
-	M.client.darkness_planemaster.alpha = 100
+	M.dark_plane.alphas["tajaran"] = 155
 
 /datum/organ/internal/eyes/grey
 	name = "huge eyes"
@@ -55,7 +54,7 @@
 	removed_type = /obj/item/organ/internal/eyes/monstrous
 
 /datum/organ/internal/eyes/monstrous/update_perception(var/mob/living/carbon/human/M)
-	M.client.darkness_planemaster.alpha = 100
+	M.dark_plane.alphas["monstrous_vision"] = 150
 
 /datum/organ/internal/eyes/mushroom
 	name = "mushroom eyes"
@@ -65,9 +64,10 @@
 
 /datum/organ/internal/eyes/mushroom/update_perception(var/mob/living/carbon/human/M)
 	if (dark_mode)
-		M.client.darkness_planemaster.blend_mode = BLEND_SUBTRACT
-		M.client.darkness_planemaster.alpha = 100
-		M.client.darkness_planemaster.color = "#FF0000"
+		M.master_plane.blend_mode = BLEND_SUBTRACT
+		M.dark_plane.alphas["mushroom_inverted"] = 100
+		M.dark_plane.blend_mode = BLEND_MULTIPLY
+		M.dark_plane.colours = "#FF0000"
 		M.client.color = list(
 			1,0,0,0,
 			0,1,0,0,
@@ -75,9 +75,9 @@
 			0,-0.1,0,1,
 			0,0,0,0)
 	else
-		M.client.darkness_planemaster.blend_mode = BLEND_MULTIPLY
-		M.client.darkness_planemaster.alpha = 150
-		M.client.darkness_planemaster.color = null
+		M.master_plane.blend_mode = BLEND_MULTIPLY
+		M.dark_plane.blend_mode = BLEND_ADD
+		M.dark_plane.colours = null
 		M.client.color = list(
 			1,0,0,0,
 			0,1,0,0,
